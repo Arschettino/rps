@@ -36,18 +36,10 @@ function playGame(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    let score = [0,0];
-    for (i=1; i<=5; i++) {
-        let outcome = playGame(window.prompt('Make your selection:'),computerPlay());
-        console.log(outcome);
-        if(outcome.includes("Win")) score[0]++;
-        else if(outcome.includes("Lose")) score[1]++;
-    }
-    if(score[0]>score[1]) return 'Player Wins';
-    else if(score[1]>score[0]) return 'Computer Wins';
-    else return "It's a Tie!";
-}
-
-
-console.log(game());
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+    button.addEventListener('click', e => {
+        const results = document.querySelector('.results');
+        results.textContent = playGame(e.target.classList.value, computerPlay());
+    })
+})
